@@ -23,7 +23,7 @@ const options = {
             }
         ]
     },
-    apis: ['./app.js']
+    apis: ['./app.js', './route.js']
 }
 
 
@@ -67,7 +67,41 @@ app.get('/', function(req, res){
     console.log('get api hit')
 });
 
+/**
+ * @swagger
+ * /createorder:
+ *  post:
+ *      summary: User to insert orders
+ *      description: this api fetch from mysql
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schemas:
+ *                      $ref: '#component/schemas/Orders'
+ *      responses:
+ *          200:
+ *              description: added successfully Mysql
+ */
 
+
+app.post("/createorder", function (req, res) {
+
+    var Body = req.body;
+
+    con.query("INSERT INTO Orders SET ?", Body, function (err, results) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(results);
+            res.json({
+                message: "Data Created successfully",
+            })
+            console.log(Body);
+        }
+
+    });
+});
 
 
 app.listen(8880);
