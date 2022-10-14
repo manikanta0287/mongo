@@ -1,7 +1,9 @@
 const { MongoClient } = require("mongodb");
 const express = require('express');
-const { application } = require("express");
+// const { application } = require("express");
 const app = express();
+const { app2 } = require ( './route.js' );
+
 
 const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
@@ -104,4 +106,7 @@ app.post("/createorder", function (req, res) {
 });
 
 
-app.listen(8880);
+app.listen(4440);
+
+
+module.exports = app
